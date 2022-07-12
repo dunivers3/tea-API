@@ -1,34 +1,36 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
-const PORT = 8000
+const PORT = (process.env.PORT || 5050)
 
 app.use(cors())
 
 const tea = {
     "oolong": {
-        "type":"black",
-        "flavor":"hot",
-        "waterTemp":200,
-        "steepTimeSeconds":180,
-        "caffeneited":true,
-        "origin":"Yoh momma's house"
+        "type": "black",
+        "flavor": "hot",
+        "waterTemp": 200,
+        "steepTimeSeconds": 180,
+        "caffeneited": true,
+        "origin": "Yoh momma's house"
     },
+
     "green tea": {
-        "type":"green tea",
-        "flavor":"mint",
-        "waterTemp":156,
-        "steepTimeSeconds":210,
-        "caffeneited":false,
-        "origin":"Yoh auntie's house"
+        "type": "green tea",
+        "flavor": "mint",
+        "waterTemp": 156,
+        "steepTimeSeconds": 210,
+        "caffeneited": false,
+        "origin": "Yoh auntie's house"
     },
+
     "chocolate": {
-        "type":"cream",
-        "flavor":"chocolate",
-        "waterTemp":400,
-        "steepTimeSeconds":700,
-        "caffeneited":false,
-        "origin":"Yoh momma's house"
+        "type": "cream",
+        "flavor": "chocolate",
+        "waterTemp": 400,
+        "steepTimeSeconds": 700,
+        "caffeneited": false,
+        "origin": "Yoh momma's house"
     }
 }
 
@@ -38,13 +40,13 @@ app.get("/", (req, res) => {
 
 app.get('/api/:name', (req, res) => {
     const teaName = req.params.name.toLowerCase()
-    if(tea[teaName]){
+    if (tea[teaName]) {
         res.json(tea[teaName])
-    }else {
+    } else {
         res.json(tea["chocolate"])
     }
 })
 
-app.listen(process.env.PORT || PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
